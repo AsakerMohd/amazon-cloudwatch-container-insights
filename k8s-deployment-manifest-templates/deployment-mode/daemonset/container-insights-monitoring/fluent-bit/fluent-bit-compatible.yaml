@@ -155,6 +155,8 @@ data:
         Name                systemd
         Tag                 dataplane.systemd.*
         Systemd_Filter      _SYSTEMD_UNIT=docker.service
+        Systemd_Filter      _SYSTEMD_UNIT=kubelet.service
+        Systemd_Filter      _SYSTEMD_UNIT=kubeproxy.service
         DB                  /var/fluent-bit/state/systemd.db
         Path                /var/log/journal
         Read_From_Tail      ${READ_FROM_TAIL}
@@ -179,7 +181,7 @@ data:
         log_group_name      /aws/containerinsights/${CLUSTER_NAME}/dataplane
         log_stream_name     $(tag[2]).$(tag[3])-$(hostname)
         auto_create_group   true
-        extra_user_agent    container-insight
+        extra_user_agent    container-insights
     
   host-log.conf: |
     [INPUT]
